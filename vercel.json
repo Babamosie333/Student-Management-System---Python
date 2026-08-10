@@ -5,10 +5,24 @@
             "framework": "create-react-app"
         },
         "backend": {
-            "root": "backend"
+            "root": "backend",
+            "framework": "express",
+            "entrypoint": "index.js"
+        },
+        "ml": {
+            "root": "ml-service",
+            "framework": "flask",
+            "entrypoint": "app:app"
         }
     },
     "rewrites": [
+        {
+            "source": "/api/predict",
+            "destination": {
+                "type": "service",
+                "service": "ml"
+            }
+        },
         {
             "source": "/api(/.*)?",
             "destination": {
